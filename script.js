@@ -25,7 +25,7 @@ function genPassword() {
     var minLen = parseInt(document.getElementById("minLength").value);
     var maxLen = parseInt(document.getElementById("maxLength").value);
     var len = Math.round(Math.random( )*(maxLen-minLen)+minLen); 
-    console.log(len);
+    
     var runFun = true, erCheck = "", erNumMin = "", erNumMax = "";
     if(charBox.checked || numBox.checked || lowBox.checked || upBox.checked){
        
@@ -80,7 +80,7 @@ if (runFun){
         mastArr = mastArr.concat(upChar);
     }
     
-    console.log(mastArr);
+    
 for(i=0;i<len;i++){
    var mArrayIndex = Math.floor(Math.random()*mastArr.length);
 password += mastArr[mArrayIndex];
@@ -89,7 +89,18 @@ password += mastArr[mArrayIndex];
 }
 document.getElementsByClassName("passwordText")[0].firstElementChild.innerText = password;
 password = "";
+mastArr = [];
 }else{
     alert("The following errors must be fixed: \n"+erNumMin+ erNumMax+ erCheck)
 }
+}
+
+function clipBoard(){
+    var copyText = document.querySelector(".myText");
+    var textArea = document.createElement("textarea");
+    textArea.value = copyText.textContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("Copy");
+    textArea.remove();
 }
